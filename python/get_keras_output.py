@@ -1,8 +1,14 @@
 from __future__ import print_function
 '''
+NOTE: This verison copied from: https://github.com/thinktopic/cortex on
+11/28/2016. If you're adapting this example for your own use you should verify
+that the export/import process hasn't change and that this verison of the script
+is current.
+
 This script produces an hdf5 file with outputs for each layer.
 
-Inputs: 1) Model configuration (json, written out from keras using model.to_json())
+Inputs: 1) Model configuration (json, written out from keras
+           using model.to_json())
         2) weights (HDF5 written out from keras using model.save_weights())
 
 Outputs:  An HDF5 file containing
