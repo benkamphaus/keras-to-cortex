@@ -1,20 +1,21 @@
 (ns keras-to-cortex.converter
   (:require [think.cortex.keras.core :as keras]
-            [taoensso.nippy :as nippy])
-  (:import [java.io DataInputStream DataOutputStream]))
+            [taoensso.nippy :as nippy]
+            [clojure.core.matrix :as m])
+  (:import [java.io DataInputStream DataOutputStream])
+  (:use clojure.repl))
 
 (comment
   ;; dev example
   (require 'keras-to-cortex.converter)
   (in-ns 'keras-to-cortex.converter)
-  (use 'clojure.repl)
 
-  (def converted-model-uri "resources/vgg16.cnn")
+  (def converted-model-uri "resources/simple.cnn")
 
   (def model
-    (keras/load-sidecar-and-verify "python/vgg16.json"
-                                   "python/vgg16.h5"
-                                   "python/vgg16_output.h5"))
+    (keras/load-sidecar-and-verify "python/simple.json"
+                                   "python/simple.h5"
+                                   "python/simple_output.h5"))
 
   ;; save model
   (with-open [w (clojure.java.io/output-stream converted-model-uri)]
