@@ -33,10 +33,22 @@
                                              [0])] ;; only one index, 0 (list of indexes in ds)
     (ffirst (train/run model img-ds [:data]))))
 
-(def test-image
-  (let [img-file (clojure.java.io/file "resources/zazzy-cifar10.png")]
+(defn read-image
+  "Read image at img-path into buffered image."
+  [img-path]
+  (let [img-file (clojure.java.io/file img-path)]
     (img/load-image img-file)))
 
 (comment
-  (infer test-image)
+  ;; read in a couple of example images
+  (def zazzy (read-image "resources/zazzy-cifar10.png"))
+  (def car (read-image "resources/car-cifar10.png"))
+
+  ;; run inference on them
+  (infer zazzy)
+  (infer car)
+
+  ;; time cpu inference (for these small images w/simple model,
+  ;; I see ~10 msec per inference.
+  (time (infer zazzy))
 )
